@@ -1,4 +1,9 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 
 import { EditPositionDto, PositionDto } from './dto/position.dto';
@@ -58,7 +63,7 @@ export class PositionService {
     }
 
     if (position.applications.length) {
-      throw new NotFoundException('Cannot delete position with applications');
+      throw new ForbiddenException('Cannot delete position with applications');
     }
 
     await this.positionRepo.remove(position);

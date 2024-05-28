@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -112,7 +112,7 @@ const handleFormSubmit = async (data: { candidate: Candidate | null; cv: string 
 
 
 return (
-  <div>
+  <div data-testid={`${type}-accordion`}>
     {data.map((item) => (
       <Accordion key={item.id}>
         <AccordionSummary

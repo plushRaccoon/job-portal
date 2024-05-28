@@ -19,8 +19,8 @@ export class CandidateService {
   async create(candidateDto: CandidateDto) {
     try {
       const candidate = this.candidateRepo.create({
-      ...candidateDto,
-    });
+        ...candidateDto,
+      });
 
       return await this.candidateRepo.save(candidate);
     } catch (error) {

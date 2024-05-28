@@ -1,5 +1,5 @@
 import { Modal, Box, Typography, TextField, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPosition } from "../api/requests";
 import { StyleForModals } from "../utils/constants";
 import { ErrorModal } from "./error-modal";

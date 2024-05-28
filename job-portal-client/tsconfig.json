@@ -12,14 +12,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": [
+      "vite/client",
+      "vitest",
+      "jest"
+    ],
+
   },
-  "include": ["src"],
+  "include": ["src", "./src/__tests__/vitest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

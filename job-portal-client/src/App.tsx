@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../src/styles/App.css'
 import { AccordionComponent } from './components/accordion'
 import { SectionHeader } from './components/section-header'
@@ -26,7 +26,7 @@ function App() {
       setPositions(fetchedPositions);
       setCandidates(fetchedCandidates);
     } catch (error) {
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error.message);
       setOpenErrorModal(true);
     }
   };

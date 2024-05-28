@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Box, Button, TextField, MenuItem, Select, InputLabel, FormControl, Modal, Typography } from '@mui/material';
 import { StyleForModals } from '../utils/constants';
 
@@ -55,7 +55,6 @@ export const ApplyForm: FC<ApplyFormProps> = ({ open, candidates, handleSubmit, 
   };
 
   return (
-    <>
       <Modal
         open={open}
         onClose={handleCloseForm}
@@ -94,7 +93,6 @@ export const ApplyForm: FC<ApplyFormProps> = ({ open, candidates, handleSubmit, 
           </Button>
         </Box>
       </Modal>
-    </>
   );
 };
 
@@ -115,7 +113,8 @@ const EditApplicationForm: FC<EditApplicationFormProps> = ({ open, handleClose, 
   }, [application]);
 
   const handleCvChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCv(application.cv = event.target.value);
+    application.cv = event.target.value;
+    setCv(event.target.value);
   };
 
   const handleFormSubmit = () => {

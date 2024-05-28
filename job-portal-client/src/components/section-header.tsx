@@ -1,7 +1,6 @@
 import Button from "@mui/material/Button";
-import { FC } from "react";
+import React, { FC } from "react";
 import '../styles/section-header.css';
-import React from "react";
 import { CreateCandidateForm } from "./candidate-form";
 import { CreatePositionForm } from "./position-form";
 
