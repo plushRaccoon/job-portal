@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+
+  job-portal-mysql:
+    image: "mysql:8.4"
+    restart: always
+    env_file: .env
+    container_name: job-portal-mysql
+    volumes:
+      - job-portal-db:/var/lib/mysql
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_DATABASE:$MYSQL_DATABASE
+      - MYSQL_ROOT_PASSWORD:$MYSQL_ROOT_PASSWORD
+      - MYSQL_USER:$MYSQL_USER
+      - MYSQL_PASSWORD:$MYSQL_PASSWORD
+    networks:
+      - job-portal-network
+
+  job-portal-server:
+    build: 
+      context: ./job-portal-server
+      dockerfile: Dockerfile
+    container_name: job-portal-server
+    restart: always
+    env_file: .env
+    environment:
+      - MYSQL_HOST=job-portal-mysql
+      - MYSQL_PORT:$MYSQL_PORT
+      - MYSQL_USER:$MYSQL_USER
+      - MYSQL_PASSWORD:$MYSQL_PASSWORD
+      - MYSQL_DATABASE:$MYSQL_DATABASE
+      - MYSQL_ROOT_PASSWORD:$MYSQL_ROOT_PASSWORD
+    ports:
+      - 5000:5000
+    depends_on:
+      - job-portal-mysql
+    networks:
+      - job-portal-network
+
+  job-portal-client:
+    build: 
+      context: ./job-portal-client
+      dockerfile: Dockerfile
+    container_name: job-portal-client
+    restart: always
+    env_file: .env
+    ports:
+      - 8080:5173
+    depends_on:
+      - job-portal-server
+    networks:
+      - job-portal-network
+
+networks:
+  job-portal-network:
+    driver: bridge
+
+volumes:
+  job-portal-db:

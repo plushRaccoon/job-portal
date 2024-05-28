@@ -1,0 +1,14 @@
+{
+  "name": "job-portal",
+  "version": "1.0.0",
+  "description": "A web app for applying to jobs",
+  "main": "index.js",
+  "scripts": {
+    "docker-build": "docker-compose build",
+    "docker-start": "docker-compose up",
+    "docker-stop": "docker-compose down",
+    "start": "docker-compose build && docker-compose up"
+  },
+  "author": "",
+  "license": "ISC"
+}
