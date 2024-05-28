@@ -1,0 +1,97 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RenderCandidatesData Component > matches snapshot 1`] = `
+<DocumentFragment>
+  John Doe
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+    style="margin: 0px 8px;"
+  />
+  john.doe@example.com
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+    style="margin: 0px 8px;"
+  />
+  123-456-7890
+</DocumentFragment>
+`;
+
+exports[`RenderCandidatesDetails Component > renders applications correctly 1`] = `
+<li
+  class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1rki8sg-MuiListItem-root"
+>
+  <div
+    class="MuiListItemText-root css-1vculsn-MuiListItemText-root"
+  >
+    <span
+      class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+    >
+      <div
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-1rwzck"
+        >
+          Software Engineer
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+            style="margin: 0px 8px;"
+          />
+          Active
+        </div>
+        John Doe CV
+      </div>
+    </span>
+  </div>
+  <div
+    class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+  >
+    <button
+      aria-label="edit"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-mf1cb5-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="BorderColorRoundedIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M20 24H4c-1.1 0-2-.9-2-2s.9-2 2-2h16c1.1 0 2 .9 2 2s-.9 2-2 2M13.06 5.19l3.75 3.75-8.77 8.77c-.18.19-.44.29-.7.29H5c-.55 0-1-.45-1-1v-2.34c0-.27.11-.52.29-.71zm4.82 2.68-3.75-3.75 1.83-1.83c.39-.39 1.02-.39 1.41 0l2.34 2.34c.39.39.39 1.02 0 1.41z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <div
+    class="MuiListItemSecondaryAction-root css-518kzi-MuiListItemSecondaryAction-root"
+  >
+    <button
+      aria-label="delete"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-gmng1k-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="DeleteIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</li>
+`;

@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RenderPositionsData Component > matches snapshot 1`] = `
+<DocumentFragment>
+  Software Engineer
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+    style="margin: 0px 8px;"
+  />
+  Active
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+    style="margin: 0px 8px;"
+  />
+  Applied: 1
+</DocumentFragment>
+`;
+
+exports[`RenderPositionsDetails Component > matches snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+  >
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <div
+        class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+        >
+          <div
+            class="MuiBox-root css-0"
+          >
+            <div
+              class="MuiBox-root css-1rwzck"
+            >
+              John Doe
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+                style="margin: 0px 8px;"
+              />
+              john.doe@example.com
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+                style="margin: 0px 8px;"
+              />
+              123-456-7890
+            </div>
+            John Doe CV
+          </div>
+        </span>
+      </div>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`RenderPositionsDetails Component > renders applications correctly 1`] = `
+<DocumentFragment>
+  <ul
+    class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+  >
+    <li
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+    >
+      <div
+        class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+        >
+          <div
+            class="MuiBox-root css-0"
+          >
+            <div
+              class="MuiBox-root css-1rwzck"
+            >
+              John Doe
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+                style="margin: 0px 8px;"
+              />
+              john.doe@example.com
+              <hr
+                class="MuiDivider-root MuiDivider-fullWidth MuiDivider-vertical MuiDivider-flexItem css-1tk1bks-MuiDivider-root"
+                style="margin: 0px 8px;"
+              />
+              123-456-7890
+            </div>
+            John Doe CV
+          </div>
+        </span>
+      </div>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
