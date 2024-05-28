@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   job-portal-mysql:
-    image: "mysql:8.4"
+    image: "mysql:8.0"
     restart: always
     env_file: .env
     container_name: job-portal-mysql
