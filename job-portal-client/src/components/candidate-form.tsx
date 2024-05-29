@@ -1,8 +1,9 @@
-import { Modal, Box, Typography, TextField, Button } from "@mui/material";
+import { Modal, Box, Typography, TextField, Button, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { createCandidate } from "../api/requests";
 import { StyleForModals } from "../utils/constants";
 import { ErrorModal } from "./error-modal";
+import CloseIcon from '@mui/icons-material/Close';
 
 const CreateCandidateForm = ({ open, handleClose, addCandidate, candidate, updateCandidate }) => {
   const [formData, setFormData] = useState({
@@ -32,6 +33,10 @@ const CreateCandidateForm = ({ open, handleClose, addCandidate, candidate, updat
 
   const handleSubmit = async () => {
     try {
+      if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone) {
+        throw new Error('All fields are required');
+      }
+
       if (candidate) {
         await updateCandidate(candidate.id, formData);
 
@@ -76,6 +81,9 @@ const CreateCandidateForm = ({ open, handleClose, addCandidate, candidate, updat
           <Typography id="create-candidate-form-title" variant="h6" component="h2">
             {candidate ? 'Edit Candidate' : 'Create Candidate'}
           </Typography>
+          <IconButton data-testid='close-icon' onClick={handleClose} sx={{ position: 'absolute', right: 0, top: 0 }}>
+            <CloseIcon />
+          </IconButton>
           <TextField
             margin="normal"
             required

@@ -1,4 +1,5 @@
-import { Modal, Box, Typography, TextField, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Modal, Box, Typography, TextField, Button, FormControl, InputLabel, MenuItem, Select, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import React, { useEffect, useState } from "react";
 import { createPosition } from "../api/requests";
 import { StyleForModals } from "../utils/constants";
@@ -11,6 +12,8 @@ export const CreatePositionForm = ({ open, handleClose, addPosition }) => {
   
   const handleSubmit = async () => {
     try {
+      if (!title) throw new Error('Title is required');
+
       const newPosition = await createPosition(title);
       if (newPosition?.statusCode === 201|| newPosition?.status === 201) {
         addPosition(newPosition.data);
@@ -41,6 +44,9 @@ export const CreatePositionForm = ({ open, handleClose, addPosition }) => {
           <Typography id="create-position-form-title" variant="h6" component="h2">
             Create Position
           </Typography>
+          <IconButton data-testid='close-icon' onClick={handleClose} sx={{ position: 'absolute', right: 0, top: 0 }}>
+            <CloseIcon />
+          </IconButton>
           <TextField
             margin="normal"
             required
@@ -96,6 +102,7 @@ export const EditPositionForm = ({ open, handleClose, position, updatePosition }
 
   const handleSubmit = async () => {
     try {
+      if (!formData.title) throw new Error('Title is required');
       await updatePosition(position.id, formData);
       handleClose();
     } catch (error) {
@@ -121,6 +128,9 @@ export const EditPositionForm = ({ open, handleClose, position, updatePosition }
           <Typography id="edit-position-form-title" variant="h6" component="h2">
             Edit Position
           </Typography>
+          <IconButton data-testid='close-icon' onClick={handleClose} sx={{ position: 'absolute', right: 0, top: 0 }}>
+            <CloseIcon />
+          </IconButton>
           <TextField
             margin="normal"
             required

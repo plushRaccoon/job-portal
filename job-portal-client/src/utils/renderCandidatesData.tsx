@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, List, ListItem, ListItemText, ListItemIcon, IconButton, Divider } from '@mui/material';
+import { Box, List, ListItem, ListItemText, ListItemIcon, IconButton, Divider, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import EditApplicationForm from '../components/application-form';
@@ -36,36 +36,42 @@ export const RenderCandidatesDetails = ({ item, onDelete, onEdit }) => {
 
   return (
     <>
-      {item.applications?.map((application) => {
-        const { id, cv, position: { title, status } } = application;
-        return (
-          <List key={id}>
-            <ListItem
-              secondaryAction={
-                <IconButton edge="end" aria-label="delete" color="error" onClick={() => onDelete('applications', id)}>
-                  <DeleteIcon />
-                </IconButton>
-              }
-            >
-              <ListItemText sx={{ marginRight: 10 }}>
-                <Box key={id}>
-                  <Box display="flex" alignItems="center" marginBottom="10px">
-                    {title}
-                    <Divider orientation="vertical" flexItem style={{ margin: '0 8px' }} />
-                    {status}
+      {item.applications && item.applications.length > 0 ? (
+        item.applications.map((application) => {
+          const { id, cv, position: { title, status } } = application;
+          return (
+            <List key={id}>
+              <ListItem
+                secondaryAction={
+                  <IconButton edge="end" aria-label="delete" color="error" onClick={() => onDelete('applications', id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                <ListItemText sx={{ marginRight: 10 }}>
+                  <Box key={id}>
+                    <Box display="flex" alignItems="center" marginBottom="10px">
+                      {title}
+                      <Divider orientation="vertical" flexItem style={{ margin: '0 8px' }} />
+                      {status}
+                    </Box>
+                    {cv}
                   </Box>
-                  {cv}
-                </Box>
-              </ListItemText>
-              <ListItemIcon>
-                <IconButton size="large" aria-label="edit" color="default" onClick={() => handleEditClick(application)}>
-                  <BorderColorRoundedIcon />
-                </IconButton>
-              </ListItemIcon>
-            </ListItem>
-          </List>
-        );
-      })}
+                </ListItemText>
+                <ListItemIcon>
+                  <IconButton size="large" aria-label="edit" color="default" onClick={() => handleEditClick(application)}>
+                    <BorderColorRoundedIcon />
+                  </IconButton>
+                </ListItemIcon>
+              </ListItem>
+            </List>
+          );
+        })
+      ) : (
+        <Typography variant="body1" color="textSecondary" align="center">
+          No records
+        </Typography>
+      )}
       {editApplication && (
         <EditApplicationForm
           open={openEditModal}

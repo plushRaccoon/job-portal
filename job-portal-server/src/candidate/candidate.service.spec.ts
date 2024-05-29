@@ -50,9 +50,7 @@ describe('CandidateService', () => {
       const result = await service.create(mockCandidateDto);
 
       expect(result).toBe(mockCandidate);
-      expect(mockRepository.create).toHaveBeenCalledWith(
-        mockCandidateDto,
-      );
+      expect(mockRepository.create).toHaveBeenCalledWith(mockCandidateDto);
       expect(mockRepository.save).toHaveBeenCalledWith(mockCandidate);
     });
 
@@ -126,9 +124,7 @@ describe('CandidateService', () => {
         where: { id: mockCandidateId },
         relations: { applications: true },
       });
-      expect(mockRepository.remove).toHaveBeenCalledWith(
-        mockCandidate,
-      );
+      expect(mockRepository.remove).toHaveBeenCalledWith(mockCandidate);
     });
 
     it('should throw NotFoundException if candidate not found', async () => {

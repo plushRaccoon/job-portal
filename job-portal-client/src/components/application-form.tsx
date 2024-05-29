@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Box, Button, TextField, MenuItem, Select, InputLabel, FormControl, Modal, Typography } from '@mui/material';
+import { Box, Button, TextField, MenuItem, Select, InputLabel, FormControl, Modal, Typography, IconButton } from '@mui/material';
 import { StyleForModals } from '../utils/constants';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Candidate {
   id: string;
@@ -65,6 +66,9 @@ export const ApplyForm: FC<ApplyFormProps> = ({ open, candidates, handleSubmit, 
           <Typography id="create-application-form-title" variant="h6" component="h2">
             Apply to the position
           </Typography>
+          <IconButton data-testid='close-icon' onClick={handleClose} sx={{ position: 'absolute', right: 0, top: 0 }}>
+            <CloseIcon />
+          </IconButton>
           <FormControl fullWidth margin="normal">
             <InputLabel id="candidate-label">Candidate</InputLabel>
             <Select
@@ -72,11 +76,15 @@ export const ApplyForm: FC<ApplyFormProps> = ({ open, candidates, handleSubmit, 
               value={formData.candidate ? formData.candidate.id : ''}
               onChange={handleCandidateChange}
             >
-              {candidates.map((candidate) => (
-                <MenuItem key={candidate.id} value={candidate.id}>
-                  {candidate.firstName} {candidate.lastName}
-                </MenuItem>
-              ))}
+              {candidates.length > 0 ? (
+                candidates.map((candidate) => (
+                  <MenuItem key={candidate.id} value={candidate.id}>
+                    {candidate.firstName} {candidate.lastName}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem value={''}>No candidates</MenuItem>
+              )}
             </Select>
           </FormControl>
           <TextField
@@ -138,6 +146,9 @@ const EditApplicationForm: FC<EditApplicationFormProps> = ({ open, handleClose, 
         <Typography id="edit-application-form-title" variant="h6" component="h2">
           Edit Application
         </Typography>
+        <IconButton data-testid='close-icon' onClick={handleClose} sx={{ position: 'absolute', right: 0, top: 0 }}>
+          <CloseIcon />
+        </IconButton>
         <TextField
           fullWidth
           margin="normal"

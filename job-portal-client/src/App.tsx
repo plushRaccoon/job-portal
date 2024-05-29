@@ -6,6 +6,7 @@ import { deleteApplication, deletePositionOrCandidate, fetchAllPositionsOrCandid
 import { ErrorModal } from './components/error-modal';
 import { EditPositionForm } from './components/position-form';
 import { CreateCandidateForm } from './components/candidate-form';
+import AutohideSnackbar from './components/info-snackBar';
 
 function App() {
 
@@ -13,6 +14,8 @@ function App() {
   const [candidates, setCandidates] = useState([]);
   const [openErrorModal, setOpenErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [openInfoSnackbar, setOpenInfoSnackbar] = useState(false);
+  const [infoMessage, setInfoMessage] = useState('');
   const [editPosition, setEditPosition] = useState(null);
   const [editCandidate, setEditCandidate] = useState(null);
   const [openEditPositionModal, setOpenEditPositionModal] = useState(false);
@@ -39,12 +42,20 @@ function App() {
     setOpenErrorModal(false);
   };
 
+  const handleCloseInfoSnackbar = () => {
+    setOpenInfoSnackbar(false);
+  };
+
   const addCandidate = (newCandidate) => {
     setCandidates((prevCandidates) => [...prevCandidates, newCandidate]);
+    setInfoMessage('Candidate created');
+    setOpenInfoSnackbar(true);
   };
 
   const addPosition = (newPosition) => {
     setPositions((prevPositions) => [...prevPositions, newPosition]);
+    setInfoMessage('Position created');
+    setOpenInfoSnackbar(true);
   }
 
   const handleDelete = async (type, id) => {
@@ -60,6 +71,8 @@ function App() {
           setCandidates((prevCandidates) => prevCandidates.filter((candidate) => candidate.id !== id));
         }
       }
+      setInfoMessage(`${type.slice(0, -1)} deleted successfully`);
+      setOpenInfoSnackbar(true);
     } catch (error) {
       setErrorMessage(error.response.data.message);
       setOpenErrorModal(true);
@@ -112,6 +125,8 @@ function App() {
         )
       );
 
+      setInfoMessage('Position updated successfully');
+      setOpenInfoSnackbar(true);
     } catch (error) {
       setErrorMessage(error.message);
       setOpenErrorModal(true);
@@ -133,7 +148,10 @@ function App() {
             ? { ...position, applications: position.applications.map((app) => app.candidate.id === id ? { ...app, candidate: updatedCandidate } : app) }
             : position
         )
-      );
+    );
+    
+    setInfoMessage('Candidate updated successfully');
+    setOpenInfoSnackbar(true);
   };
 
   const updateApplication = async (id, updatedData) => {
@@ -142,6 +160,9 @@ function App() {
       if (updatedApplication.statusCode) {
         throw new Error(updatedApplication.message);
       }
+
+      setInfoMessage('Application updated successfully');
+      setOpenInfoSnackbar(true);
       await fetchData();
     } catch (error) {
       setErrorMessage(error.response.data.message);
@@ -161,6 +182,7 @@ function App() {
         <AccordionComponent type="candidates" data={candidates} onDelete={handleDelete} onEdit={handleEdit} onCandidateOrPositionEdit={handleEditClick} />
       </section>
       <ErrorModal openErrorModal={openErrorModal} handleCloseErrorModal={handleCloseErrorModal} errorMessage={errorMessage} />
+      <AutohideSnackbar isOpen={openInfoSnackbar} message={infoMessage} handleClose={handleCloseInfoSnackbar} />
       <EditPositionForm open={openEditPositionModal} handleClose={() => setOpenEditPositionModal(false)} position={editPosition} updatePosition={updatePosition} />
       <CreateCandidateForm open={openEditCandidateModal} handleClose={() => setOpenEditCandidateModal(false)} candidate={editCandidate} updateCandidate={updateCandidate} addCandidate={undefined} />
     </>

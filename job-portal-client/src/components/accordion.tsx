@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import Box from '@mui/material/Box';
-import { Button, Tooltip } from '@mui/material';
+import { Button, Tooltip, Typography } from '@mui/material';
 import { RenderCandidatesData, RenderCandidatesDetails } from '../utils/renderCandidatesData';
 import { RenderPositionsDetails, RenderPositionsData } from '../utils/renderPositionsData';
 import { createApplication, fetchAllPositionsOrCandidates } from '../api/requests';
@@ -62,6 +62,7 @@ const handleFormClose = () => {
 const handleFormSubmit = async (data: { candidate: Candidate | null; cv: string }) => {
   try {
     if (!selectedPosition) return;
+    if (!data.candidate) throw new Error('Please select a candidate')
 
     const newApplication = await createApplication(selectedPosition.id, {
       candidateId: data.candidate.id,
@@ -113,42 +114,45 @@ const handleFormSubmit = async (data: { candidate: Candidate | null; cv: string 
 
 return (
   <div data-testid={`${type}-accordion`}>
-    {data.map((item) => {
-      if (!item) null
-      return (
-      <Accordion key={item.id}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls={`${type}-content`}
-          id={`${type}-header`}
-        >
-          <Box display="flex" alignItems="center" width="100%" justifyContent="space-between">
-            <Box display="flex" alignItems="center">
-              {type === 'positions' ? <RenderPositionsData item={item} /> : <RenderCandidatesData item={item} />}
+    {data.length > 0 ? (
+      data.map((item) => (
+        <Accordion key={item.id}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={`${type}-content`}
+            id={`${type}-header`}
+          >
+            <Box display="flex" alignItems="center" width="100%" justifyContent="space-between">
+              <Box display="flex" alignItems="center">
+                {type === 'positions' ? <RenderPositionsData item={item} /> : <RenderCandidatesData item={item} />}
+              </Box>
+              {type === 'positions' && (
+                <Button
+                  variant="outlined"
+                  size="small"
+                  sx={{ marginRight: 3 }}
+                  onClick={() => handleApplyClick(item as Position)}
+                >
+                  Apply
+                </Button>
+              )}
             </Box>
-            {type === 'positions' && (
-              <Button
-                variant="outlined"
-                size="small"
-                sx={{ marginRight: 3 }}
-                onClick={() => handleApplyClick(item as Position)}
-              >
-                Apply
-              </Button>
-            )}
-          </Box>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Box display="flex" flexDirection="column" alignItems="flex-start">
-            {type === 'positions' ? <RenderPositionsDetails item={item} /> : <RenderCandidatesDetails item={item} onDelete={onDelete} onEdit={onEdit} />}
-          </Box>
-        </AccordionDetails>
-        <AccordionActions>
-          <DeleteAndEditButtons type={type} item={item} onDelete={() => onDelete(type, item.id)} onCandidateOrPositionEdit={() => onCandidateOrPositionEdit(type, item, {})} />
-        </AccordionActions>
-      </Accordion>
-        )
-    })}
+          </AccordionSummary>
+          <AccordionDetails>
+            <Box display="flex" flexDirection="column" alignItems="flex-start">
+              {type === 'positions' ? <RenderPositionsDetails item={item} /> : <RenderCandidatesDetails item={item} onDelete={onDelete} onEdit={onEdit} />}
+            </Box>
+          </AccordionDetails>
+          <AccordionActions>
+            <DeleteAndEditButtons type={type} item={item} onDelete={() => onDelete(type, item.id)} onCandidateOrPositionEdit={() => onCandidateOrPositionEdit(type, item, {})} />
+          </AccordionActions>
+        </Accordion>
+      ))
+    ) : (
+      <Typography variant="h5" color="GrayText" align="center">
+        No records
+      </Typography>
+    )}
     <ApplyForm
       open={formOpen}
       handleClose={handleFormClose}
