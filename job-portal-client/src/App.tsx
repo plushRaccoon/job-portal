@@ -148,8 +148,7 @@ function App() {
             ? { ...position, applications: position.applications.map((app) => app.candidate.id === id ? { ...app, candidate: updatedCandidate } : app) }
             : position
         )
-    );
-    
+      );
     setInfoMessage('Candidate updated successfully');
     setOpenInfoSnackbar(true);
   };

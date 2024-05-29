@@ -76,6 +76,7 @@ export const EditPositionForm = ({ open, handleClose, position, updatePosition }
   });
   const [openErrorModal, setOpenErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [handleChangeCalled, setHandleChangeCalled] = useState(false);
 
   useEffect(() => {
     if (position) {
@@ -91,6 +92,7 @@ export const EditPositionForm = ({ open, handleClose, position, updatePosition }
     setFormData((prevData) => {
       return ({ ...position, ...prevData, [name]: value })
     });
+    setHandleChangeCalled(true);
   };
 
   const handleStatusChange = (e) => {
@@ -98,12 +100,19 @@ export const EditPositionForm = ({ open, handleClose, position, updatePosition }
     setFormData((prevData) => {
       return ({ ...position, ...prevData, status: value })
     });
+    setHandleChangeCalled(true);
   };
 
   const handleSubmit = async () => {
     try {
       if (!formData.title) throw new Error('Title is required');
-      await updatePosition(position.id, formData);
+
+      if (handleChangeCalled) {
+        await updatePosition(position.id, formData);
+        
+        setHandleChangeCalled(false);
+      }
+
       handleClose();
     } catch (error) {
       setErrorMessage(error.message);

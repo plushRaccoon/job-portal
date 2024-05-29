@@ -113,6 +113,7 @@ interface EditApplicationFormProps {
 
 const EditApplicationForm: FC<EditApplicationFormProps> = ({ open, handleClose, application, handleSubmit }) => {
   const [cv, setCv] = useState('');
+  const [handleChangeCalled, setHandleChangeCalled] = useState(false);
 
   useEffect(() => {
     if (application) {
@@ -123,10 +124,15 @@ const EditApplicationForm: FC<EditApplicationFormProps> = ({ open, handleClose, 
   const handleCvChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     application.cv = event.target.value;
     setCv(event.target.value);
+    setHandleChangeCalled(true);
   };
 
   const handleFormSubmit = () => {
-    handleSubmit(application.id, cv);
+    if (handleChangeCalled) {
+      handleSubmit(application.id, cv);
+      setHandleChangeCalled(false);
+    }
+
     handleCloseForm();
   };
 

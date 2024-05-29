@@ -14,6 +14,7 @@ const CreateCandidateForm = ({ open, handleClose, addCandidate, candidate, updat
   });
   const [openErrorModal, setOpenErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [handleChangeCalled, setHandleChangeCalled] = useState(false);
 
   useEffect(() => {
     if (candidate) {
@@ -29,6 +30,7 @@ const CreateCandidateForm = ({ open, handleClose, addCandidate, candidate, updat
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...candidate, ...prevData, [name]: value }));
+    setHandleChangeCalled(true);
   };
 
   const handleSubmit = async () => {
@@ -38,7 +40,12 @@ const CreateCandidateForm = ({ open, handleClose, addCandidate, candidate, updat
       }
 
       if (candidate) {
-        await updateCandidate(candidate.id, formData);
+
+        if (handleChangeCalled) {
+          await updateCandidate(candidate.id, formData);
+          
+          setHandleChangeCalled(false);
+        }
 
         handleClose();
       } else {
