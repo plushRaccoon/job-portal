@@ -22,7 +22,7 @@ export const createPosition = async (title: string) => {
 export const createCandidate = async (formData) => {
   try {
     const response = await axiosInstance.post('/api/candidate', formData);
-    return response;
+    return response.data;
   } catch (error) {
     return error.response.data;
   }

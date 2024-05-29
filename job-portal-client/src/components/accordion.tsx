@@ -113,7 +113,9 @@ const handleFormSubmit = async (data: { candidate: Candidate | null; cv: string 
 
 return (
   <div data-testid={`${type}-accordion`}>
-    {data.map((item) => (
+    {data.map((item) => {
+      if (!item) null
+      return (
       <Accordion key={item.id}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -145,7 +147,8 @@ return (
           <DeleteAndEditButtons type={type} item={item} onDelete={() => onDelete(type, item.id)} onCandidateOrPositionEdit={() => onCandidateOrPositionEdit(type, item, {})} />
         </AccordionActions>
       </Accordion>
-    ))}
+        )
+    })}
     <ApplyForm
       open={formOpen}
       handleClose={handleFormClose}

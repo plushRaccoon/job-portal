@@ -38,8 +38,13 @@ const CreateCandidateForm = ({ open, handleClose, addCandidate, candidate, updat
         handleClose();
       } else {
         const newCandidate = await createCandidate(formData);
+
+        if (newCandidate.statusCode && newCandidate.statusCode !== 201) {
+          throw new Error(newCandidate.message);
+        }
+
         if (addCandidate) {
-          addCandidate(newCandidate.data);
+          addCandidate(newCandidate);
         }
         setFormData({
           firstName: '',
