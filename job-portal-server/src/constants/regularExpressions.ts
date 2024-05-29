@@ -1,5 +1,5 @@
 export const TEXT_REGEX =
-  /^(?!\s)[a-zA-Z0-9\s.,'&()_\-@#!$%^*+=?<>:;]{0,}(?!\s)$/;
+  /^(?!\s)[\p{L}\p{N}\s.,'&()_\-@#!$%^*+=?<>:;]{0,}(?!\s)$/u;
 export const TEXT_REGEX_MESSAGE =
   'must only include letters, numbers, and special characters';
 
