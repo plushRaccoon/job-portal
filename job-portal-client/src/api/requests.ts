@@ -1,4 +1,4 @@
-import { axiosInstance } from "./axios/axios-instance";
+import { axiosInstance } from "./axios-instance";
 
 export const fetchAllPositionsOrCandidates = async (type) => {
   try {
